@@ -31,16 +31,6 @@ A modern task management web application built with Django and Bootstrap 5, feat
 - **SQLite**: Database management
 - **Django-Bootstrap5**: Form rendering and styling
 
-## 📸 Screenshots
-
-| Tasks List | Create Task |
-|------------|-------------|
-| ![Tasks List](./screenshots/tasks.png) | ![Create Task](./screenshots/create.png) |
-
-| Login | Dark Theme |
-|-------|------------|
-| ![Login](./screenshots/login.png) | ![Dark Theme](./screenshots/dark-theme.png) |
-
 ## 🚀 Installation
 
 1. Clone repository:
