@@ -1,6 +1,6 @@
 # Task Manager Web Application 🚀
 
-![Task Manager Banner](./screenshots/banner.png)
+![Task Manager Banner](./images/1.png)
 
 A modern task management web application built with Django and Bootstrap 5, featuring a sleek dark theme interface. You can organize your tasks efficiently with CRUD operations, status tracking, and user authentication.
 
