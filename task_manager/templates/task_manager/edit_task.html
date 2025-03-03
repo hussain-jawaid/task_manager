@@ -1,0 +1,27 @@
+{% extends 'task_manager/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container-lg mt-4">
+    <div class="card bg-dark text-light border-secondary mx-auto" style="max-width: 600px">
+        <div class="card-header border-secondary">
+            <h3 class="mb-0">Edit Task</h3>
+            <p class="text-muted mb-0 small">Original title: {{ task.title }}</p>
+        </div>
+
+        <div class="card-body">
+            <form action="{% url 'task_manager:edit_task' task.id %}" method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+
+                <div class="d-grid gap-2 mt-4">
+                    {% bootstrap_button button_type='submit' content='Update Task' class='btn btn-primary' %}
+                    <a href="{% url 'task_manager:index' %}" class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

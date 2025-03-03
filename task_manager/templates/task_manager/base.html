@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load django_bootstrap5 %}
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Task Manager{% endblock %}</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        body {
+            background-color: #121212;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: #1a1a1a !important;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'task_manager:index' %}">Task Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <span class="navbar-text text-light me-3">Welcome, {{ user.username }}</span>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'accounts:register' %}">Sign Up</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                {% if user.is_authenticated %}
+                <form action="{% url 'accounts:logout' %}" method="post" class="ms-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-lg mt-4 flex-grow-1">
+        {% bootstrap_messages %}
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer class="bg-dark text-secondary py-3 mt-4">
+        <div class="container-fluid text-center">
+            <p class="mb-0">&copy; {% now "Y" %} Task Manager. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

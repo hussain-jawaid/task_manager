@@ -1,0 +1,26 @@
+{% extends 'task_manager/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container-lg mt-4">
+    <div class="card bg-dark text-light border-secondary mx-auto" style="max-width: 600px">
+        <div class="card-header border-secondary">
+            <h3>Create New Task</h3>
+        </div>
+
+        <div class="card-body">
+            <form action="{% url 'task_manager:new_task' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+
+                <div class="d-grid gap-2 mt-4">
+                    {% bootstrap_button button_type='submit' content='Create Task' class='btn btn-primary' %}
+                    <a href="{% url 'task_manager:index' %}" class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

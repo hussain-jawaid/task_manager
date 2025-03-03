@@ -1,0 +1,32 @@
+{% extends 'task_manager/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container-lg mt-4">
+    <div class="card bg-dark text-light border-danger mx-auto" style="max-width: 600px">
+        <div class="card-header border-danger">
+            <h3 class="mb-0 text-danger">Delete Task</h3>
+            <p class="text-muted mb-0 small">Title: {{ task.title }}</p>
+        </div>
+
+        <div class="card-body">
+            <div class="alert alert-dark text-warning">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                Are you sure you want to delete this task permanently?
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash3-fill me-2"></i>Confirm Delete
+                    </button>
+                    <a href="{% url 'task_manager:index' %}" class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'task_manager/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container-lg mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-light">Your Tasks</h1>
+        <a href="{% url 'task_manager:new_task' %}" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i>New Task
+        </a>
+    </div>
+
+    {% if tasks %}
+    <div class="row g-4">
+        {% for task in tasks %}
+        <div class="col-12">
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="card-title">{{ task.title }}</h5>
+                            <p class="card-text text-muted">{{ task.description }}</p>
+                        </div>
+                        <form action="{% url 'task_manager:update_status' task.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input bg-secondary" type="checkbox" role="switch"
+                                    id="status-{{ task.id }}" {% if task.status %}checked{% endif %}
+                                    onchange="this.form.submit()">
+                                <label class="form-check-label text-light small" for="status-{{ task.id }}">
+                                    {{ task.status|yesno:"Completed,In Progress" }}
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row mt-3 text-muted">
+                        <div class="col-md-6">
+                            <small>Created: {{ task.published_date|date:"M d, Y" }}</small>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <small>Due: {{ task.due_date|date:"M d, Y" }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-dark border-secondary">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a href="{% url 'task_manager:edit_task' task.id %}" class="btn btn-sm btn-outline-primary">
+                            Edit
+                        </a>
+                        <a href="{% url 'task_manager:delete_task' task.id %}" class="btn btn-sm btn-outline-danger">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-dark text-center">
+        <h4 class="alert-heading">No Tasks Found</h4>
+        <p>Start by creating your first task!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
