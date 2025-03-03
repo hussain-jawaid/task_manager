@@ -1,0 +1,27 @@
+{% extends 'task_manager/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container-lg mt-4">
+    <div class="card bg-dark text-light border-secondary mx-auto" style="max-width: 600px">
+        <div class="card-header border-secondary">
+            <h3 class="card-title mb-0">Sign Up Your New Account</h3>
+        </div>
+        
+        <div class="card-body">
+            <form action="{% url 'accounts:register' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_messages %}
+                
+                {% bootstrap_form form %}
+                
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign Up
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
