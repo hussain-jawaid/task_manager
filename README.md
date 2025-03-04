@@ -35,4 +35,4 @@ A modern task management web application built with Django and Bootstrap 5, feat
 
 1. Clone repository:
    ```bash
-   https://github.com/hussain-jawaid/task_manager
+   git clone https://github.com/hussain-jawaid/task_manager
